@@ -11,7 +11,6 @@ feature 'add new bookmark to db' do
   scenario 'it actually saves the bookmark' do
     save_bookmark
     visit('/bookmarks')
-    save_and_open_page
     expect(page).to have_content("http://makers.tech")
   end
 end

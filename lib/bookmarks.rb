@@ -5,8 +5,8 @@ require 'pg'
 class Bookmarks
 
   def self.display_all
-    self.connect_db
-    @conn.exec("SELECT * FROM bookmarks") do |result|
+    connect_db
+    @connection.exec("SELECT * FROM bookmarks") do |result|
       result.map do |row|
         row["url"]
       end
@@ -14,15 +14,20 @@ class Bookmarks
   end
 
   def self.add(url)
-    self.connect_db
-    @conn.exec("INSERT INTO bookmarks(url) VALUES('#{url}')")
+    connect_db
+    @connection.exec("INSERT INTO bookmarks(url) VALUES('#{url}')")
+  end
+
+  def self.get_by_id(id)
+    connect_db
+    @connection.exec("SELECT * FROM bookmarks WHERE id = #{id}")[0]
   end
 
   def self.connect_db
     if ENV['ENVIRONMENT'] == 'test'
-      @conn = PG.connect(dbname: 'bookmark_manager_test')
+      @connection = PG.connect(dbname: 'bookmark_manager_test')
     else
-      @conn = PG.connect(dbname: 'bookmark_manager')
+      @connection = PG.connect(dbname: 'bookmark_manager')
     end
   end
 
