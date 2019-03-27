@@ -26,8 +26,8 @@ class BookmarkManager < Sinatra::Base
   end
 
   get '/bookmarks/:id' do
-    p params 
-    "hello"
+    @id = params[:id]
+    erb :"bookmarks/view"
   end
 
   run! if app_file == $0

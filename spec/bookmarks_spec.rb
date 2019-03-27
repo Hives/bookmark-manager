@@ -2,8 +2,8 @@ require 'bookmarks'
 
 describe Bookmarks do
 
-  describe '#all' do
-    it 'returns all the bookmarks' do
+  describe '#get_by_id' do
+    it 'returns a bookmark' do
       # Add the test data
       Bookmarks.add('http://www.makersacademy.com')
       Bookmarks.add('http://www.destroyallsoftware.com')
